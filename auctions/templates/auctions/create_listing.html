@@ -1,0 +1,21 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<ul>
+    {% for each in listing %}
+        <li>Produto: {{each.title}}. {{each.description}}. Preco: {{each.starting_bid}}</li>
+    {% endfor %}
+</ul>
+
+<form action="{% url 'create' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="title_form" class="title_form" placeholder="Title:">
+    <input type="text" name="description_form" class="description_form" placeholder="Description:">
+    <input type="number" name="starting_Bid" class="starting_Bid" placeholder="Bid">
+    <input type="submit">
+</form>
+
+
+
+
+{% endblock %}

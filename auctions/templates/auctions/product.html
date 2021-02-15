@@ -1,0 +1,38 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+<h1> Product: {{ product_name.title }}</h1>
+<ul>
+    <li> Description: {{ product_name.description }}</li>
+    <li> Starting Bid: {{ product_name.starting_bid }}</li>
+    {% for comment in comments%}
+    <li> Comments: {{ comment }}</li>
+    {% endfor %}
+</ul>
+<form action="{% url 'product' product_name.title %}" method="post">
+    {% csrf_token %}
+    <input type="number" class="new_bid" name="new_bid" placeholder="Make a bid">
+    <input type="submit">
+</form>
+
+{% if toCompare %}
+    <form action="{% url 'product' product_name.title %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Delete" name="delete_field">
+    </form>
+{% endif %}
+
+<form action="{% url 'product' product_name.title %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="comments_add" placeholder="Add a comment">
+    <input type="submit" value="ADD" name="comment_add">
+</form>
+
+
+{% endblock %}
+
+
+
+
+
